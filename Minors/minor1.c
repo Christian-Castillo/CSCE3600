@@ -3,6 +3,8 @@ Author: Chalet Shelton
 Date: 9.18.17
 Professor: Mark Thompson
 Description: Minor Assignment 1 – File I/O, Memory Allocation, Parsing
+This program uses the command line to execute, read from a file, and search
+a word in the file
 */
 #include <stdio.h>
 #include <string.h>
