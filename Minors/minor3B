@@ -1,0 +1,97 @@
+#Author: Chalet Shelton
+#Date: 10.2.2017
+#Instructor: Mark Thompson
+#Decription:
+
+#! /bin/bash
+
+
+dir="$(pwd)"
+OrdinaryCount=0
+ReadableCount=0
+ExecutableCount=0
+NonOrdinaryCount=0
+NonExistCount=0
+DirectoryCount=0
+#TotalBytes
+
+if [ $# -le 1 ]
+then
+	echo "=================== file data ===================="
+	for f in $dir/*
+	do
+		if [ -f $dir ] #if file is ordinary
+		then
+			#count=$(expr $count +1)
+			((OrdinaryCount++))
+			TotalBytes=`du -hs`
+		elif [ -r $dir ] #if file is readable
+		then
+			((ReadableCount++))
+		elif [ -x $dir ] #if file is executable
+		then
+			((ExecutableCount++))
+		elif [ ! -f $dir ] #if file is non ordinary
+		then
+			((NonOrdinaryCount++))
+		elif [ ! -a $dir ] #if file is DNE
+		then
+			((NonExistCount++))
+		elif [ -d $dir ] #if file is a directory
+		then
+			((DirectoryCount++))
+		fi
+
+
+	done
+	let OREcount=OrdinaryCount+ReadableCount+ExecutableCount
+	let NOcount=NonExistCount+NonOrdinaryCount
+	let ORcount=OrdinaryCount+ReadableCount
+
+	echo "ordinary, readable, executable file     : $OREcount"
+	echo "non-existent or other types of fies	: $NOcount"
+	echo "directory files				: $DirectoryCount"
+	echo "ordinary and readable file		: $ORcount"
+	echo "total bytes in ordinay files		: `du -hs`"
+
+else [ $@ -ge 2 ]
+
+echo "=================== file data ===================="
+        for f in $dir
+        do
+                if [ -f $dir/$@ ] #if file is ordinary
+                then
+                        #count=$(expr $count +1)
+                        ((OrdinaryCount++))
+                        TotalBytes=`du -hs`
+                elif [ -r $dir/$@ ] #if file is readable
+                then
+                        ((ReadableCount++))
+                elif [ -x $dir/$@ ] #if file is executable
+                then
+                        ((ExecutableCount++))
+                elif [ ! -f $dir/$@ ] #if file is non ordinary
+                then
+                        ((NonOrdinaryCount++))
+                elif [ ! -a $dir/$@ ] #if file is DNE
+                then
+                        ((NonExistCount++))
+                elif [ -d $dir/$@ ] #if file is a directory
+                then
+                        ((DirectoryCount++))
+                fi
+
+
+        done
+        let OREcount=OrdinaryCount+ReadableCount+ExecutableCount
+        let NOcount=NonExistCount+NonOrdinaryCount
+        let ORcount=OrdinaryCount+ReadableCount
+
+        echo "ordinary, readable, executable file     : $OREcount"
+        echo "non-existent or other types of fies       : $NOcount"
+        echo "directory files                           : $DirectoryCount"
+        echo "ordinary and readable file                : $ORcount"
+        echo "total bytes in ordinay files              : `du -hs`"
+
+
+fi

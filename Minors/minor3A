@@ -1,0 +1,69 @@
+#Author: Chalet Shelton
+#Date: 10.2.2017
+#Instructor: Mark Thompson
+#Description: This program takes the height and width and prints a rectagle 
+
+#! /bin/bash
+
+if [ $0 == "" ] #if nothing is passed for height and width 
+then
+        echo "usage: ./minor3A.sh height width"
+
+elif [ $# -le  1 -o $# -ge 3 ] #if too few arguments or too many are passed
+then
+	echo "usage: ./minor3A.sh height width"
+elif [ $# -gt 2 ] #if arguments are grater than 2
+then
+	echo "usage: ./minor3A.sh height width"
+
+elif [[ $1 -le 1 || $2 -le 1 ]] #if arg 1 is less than one or arg 2 is less than 1
+then
+	echo "error: height ($1) and width ($2) must be > 1"
+else
+	height=$1
+	width=$2
+
+	if [ $height -gt 2 -a $width -ge 2 ] #if height and width are greater than 2
+	then
+		echo ""
+		for(( i=1; i<=$height;i++ ))
+		#for i in $height
+		do
+		for(( j=1;j<=$width;j++ ))
+		#for j in $width
+		do
+			if [ $i == 1 ]
+			then
+				if [ $i == $j -o $j == $width ]
+				then
+					echo -ne "+"
+				else
+					echo -ne "-"
+
+				fi
+			elif [ $i -ne $height ]
+			then
+				if [ $j == 1 ]
+				then
+					echo -ne "\n|"
+				elif [ $j == $width ]
+				then
+					echo "|"
+				else
+					echo -n " "
+				fi
+			elif [ $i == $height ]
+			then
+				if [ $j == 1 -o $j == $width ]
+ 				then
+					echo -n "+"
+				else
+					echo -n "-"
+				fi
+			fi
+		done
+		done
+
+	echo -e "\n"
+fi
+fi
