@@ -1,0 +1,6 @@
+CC=gcc
+CFLAGS=-Wall -g -pthread
+client: CliMajor2.c
+        $(CC) -o client $(CFLAGS) CliMajor2.c
+clean:
+        $(RM) client

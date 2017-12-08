@@ -1,0 +1,6 @@
+CC=gcc
+CFLAGS=-Wall -g -pthread
+server: srvMajor2.c
+        $(CC) -o server $(CFLAGS) srvMajor2.c
+clean:
+        $(RM) server
